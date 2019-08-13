@@ -15,18 +15,13 @@ public class SmallestSubstring
       for (int j = i; j < s.length(); j++)
       {
         String substring = s.substring(i, j);
-        if (containsAll(substring, distinctLetters) && substring.length() < smallest)
+        if (substring.length() < smallest && distinctLetters.chars().allMatch(c -> substring.indexOf(c) > -1))
         {
           smallest = substring.length();
         }
       }
     }
     return smallest;
-  }
-
-  private boolean containsAll(String substring, String distinctLetters)
-  {
-    return distinctLetters.chars().allMatch(c -> substring.indexOf(c) > -1);
   }
 
 }
