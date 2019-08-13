@@ -5,14 +5,9 @@ public class SmallestSubstring
 
   public int check(String s)
   {
-    String distinctLetters = "";
-    for (int i = 0; i < s.length(); i++)
-    {
-      if (distinctLetters.indexOf(s.charAt(i)) == -1)
-      {
-        distinctLetters += s.charAt(i);
-      }
-    }
+    final StringBuilder sb = new StringBuilder();
+    s.chars().distinct().forEach(c -> sb.append((char) c));
+    String distinctLetters = sb.toString();
 
     int smallest = s.length();
     for (int i = 0; i < s.length(); i++)
@@ -31,16 +26,7 @@ public class SmallestSubstring
 
   private boolean containsAll(String substring, String distinctLetters)
   {
-    boolean containsAll = true;
-    for (int i = 0; i < distinctLetters.length(); i++)
-    {
-      if (substring.indexOf(distinctLetters.charAt(i)) == -1)
-      {
-        containsAll = false;
-        break;
-      }
-    }
-    return containsAll;
+    return distinctLetters.chars().allMatch(c -> substring.indexOf(c) > -1);
   }
 
 }
